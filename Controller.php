@@ -1,17 +1,10 @@
 <?php
-include ("model.php");
 class Controller
 {
-	function find_username()
+	function find_username() 
 	{
-		$email = "ce.negro@yahoo.com";
-		$TableName = "members";
-		$ColumnNames=[];
-		$Wheres = ["email =" => $email];
-		$db = new model();
-		$query = $db -> select($TableName,$ColumnNames,$Wheres);
-		return $query;
-		
+		$user = new members();
+		return $user->find_user("ce.negro@yahoo.com");
 	}
 	
 	function get_username(){
@@ -23,10 +16,14 @@ class Controller
 		return "Hello " . $this->get_username(); 
 	}
 	
+	function change_password(){
+		$email = "ce.negro@yahoo.com";
+		$old_password = "47047";
+		$new_password = "123456";
+		$change_pass = new members();
+		return $change_pass->change_password($email, $new_password, $old_password);
+	}
+	
 }
 
 
-
-
-$user = new Controller();
-echo  $user -> hello_user();

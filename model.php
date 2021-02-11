@@ -1,23 +1,13 @@
 <?php
-class model{
+class model extends dbcore{
+	public $conn;
 	function __construct(){
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$conn;
-		try {
-		  $this->conn = new PDO("mysql:host=$servername;dbname=site2", $username, $password);
-		  // set the PDO error mode to exception
-		  $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		  //echo "Connected successfully";
-		} catch(PDOException $e) {
-		  echo "Connection failed: " . $e->getMessage();
-		}
+		$conn = $this->connection(); 
+		$this->conn = $conn;
 	}
 	function select($TableName,$ColumnNames=[],$Wheres=[])
 	{
 		$query = "Select ";
-		
 		if(count($ColumnNames))
 		{
 			foreach ($ColumnNames as $ColumnName){
@@ -45,9 +35,11 @@ class model{
 			}
 		$query .= " Where ". $Where_string;
 		}
+		echo $query;
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
 		return $select_query->fetchall();	
+		
 	}
 	function insert ($TableName, $ColumnNames=[], $Values=[])
 	{
@@ -79,7 +71,7 @@ class model{
 		$query .= $Value_string. ")";
 		$insert_query = $this->conn->prepare($query);
 		$insert_query -> execute();
-		return $insert_query->fetchall();
+		
 	}
 	function update ($TableName,$ColumnNames=[],$Values=[],$Wheres=[])
 	{
@@ -112,9 +104,10 @@ class model{
 			}
 		$query .= $Where_string;
 		}
+		echo $query;
 		$update_query = $this->conn->prepare($query);
-		$update_query -> execute();
-		return $update_query->fetchall();
+		return $update_query -> execute();
+		
 	}
 	function delete ($TableName, $Wheres)
 	{
@@ -136,6 +129,5 @@ class model{
 		}
 		$delete_query = $this->conn->prepare($query);
 		$delete_query -> execute();
-		return $delete_query->fetchall();
 	}
 }
