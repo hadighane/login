@@ -13,19 +13,14 @@ class model extends dbcore{
 			foreach ($ColumnNames as $ColumnName){
 				$Columns .= ($ColumnName. ", ");
 			}
-		$last_char = substr($Columns, -2);
-		if($last_char == ", "){
-				$Columns= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Columns);
-			}
 		}
 		else{
 			$Columns = "*";
 		}
+		$query .=  $Columns. "remove extra comma";
+		$query = str_replace(', remove extra comma', ' ', $query);
 		
-			//if($last_word == ","){
-			//	$Columns= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Columns);
-			//}
-		$query .=  $Columns. " from ". $TableName;
+		$query .= " from ". $TableName;
 		
 		if(count($Wheres))
 		{
@@ -47,7 +42,7 @@ class model extends dbcore{
 			}
 		$query .= " Where ". $Where_string;
 		}
-		//echo $query;
+		echo $query;
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
 		return $select_query->fetchall();	
@@ -116,7 +111,7 @@ class model extends dbcore{
 			}
 		$query .= $Where_string;
 		}
-		echo $query;
+		//echo $query;
 		$update_query = $this->conn->prepare($query);
 		return $update_query -> execute();
 		
