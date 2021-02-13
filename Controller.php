@@ -9,7 +9,7 @@ class Controller
 	function find_username() 
 	{
 		$user = new members();
-		return $user->find_user("ce.negro@yahoo.com");
+		return $user->find_user("ce.negro@yahoo.com", "47047");
 	}
 	
 	function get_username(){

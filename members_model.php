@@ -1,11 +1,12 @@
 <?php
 class members extends model{
 	
-	function find_user($email)
+	function find_user($email, $password)
 	{
 		$TableName = "members";
 		$ColumnNames = [];
-		$Wheres = ["email =" => $email];
+		$password = md5($password);
+		$Wheres = ["email =" => $email, "password =" => $password];
 		$query = $this-> select($TableName,$ColumnNames,$Wheres);
 		return $query;
 	}
