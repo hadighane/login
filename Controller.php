@@ -18,8 +18,8 @@ class Controller
 	
 	function change_password(){
 		$email = "ce.negro@yahoo.com";
-		$old_password = "47047";
-		$new_password = "123456";
+		$old_password = "123456";
+		$new_password = "47047";
 		$change_pass = new members();
 		return $change_pass->change_password($email, $new_password, $old_password);
 	}

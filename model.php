@@ -42,7 +42,6 @@ class model extends dbcore{
 			}
 		$query .= " Where ". $Where_string;
 		}
-		echo $query;
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
 		return $select_query->fetchall();	
@@ -87,14 +86,15 @@ class model extends dbcore{
 		{
 			$Value = 0;
 			foreach ($ColumnNames as $ColumnName){
-				$set_string .= ($ColumnName. " = ". $Values[$Value]. ", ");
+				$set_string .= ($ColumnName. " = '". $Values[$Value]. "', ");
 				$Value = $Value + 1;
 			}
 		}
 		else {
-			$set_string = $ColumnNames[0]. " = ". $Values[0]. ", ";
+			$set_string = $ColumnNames[0]. " = '". $Values[0]. "', ";
 		}
-		$query .= $set_string. " Where ";
+		$query .= $set_string. "remove extra comma Where ";
+		$query = str_replace(', remove extra comma', ' ', $query);
 		
 		if(count($Wheres))
 		{
@@ -102,16 +102,21 @@ class model extends dbcore{
 			{
 				if(count($Wheres)==1)
 				{
-					$Where_string = $Where_key. '"'. $Where_Value. '"';
+					$Where_string = $Where_key. ' = "'. $Where_Value. '"';
 				}
 				else
 				{
-					$Where_string .= $Where_key. '"'. $Where_Value. '"'. " AND ";
+					$Where_string .= $Where_key. ' = "'. $Where_Value. '"'. " AND ";
 				}
+			}
+		$where_pieces = explode(' ', $Where_string);
+			$last_word = array_pop($where_pieces);
+			if($last_word == "AND"){
+				$Where_string= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Where_string);
 			}
 		$query .= $Where_string;
 		}
-		//echo $query;
+		echo $query;
 		$update_query = $this->conn->prepare($query);
 		return $update_query -> execute();
 		
