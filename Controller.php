@@ -21,9 +21,6 @@ class Controller
 		$old_password = "47047";
 		$new_password = "123456";
 		$change_pass = new members();
+	}	
 		return $change_pass->change_password($email, $new_password, $old_password);
-	}
-	
 }
-
-

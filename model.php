@@ -13,11 +13,18 @@ class model extends dbcore{
 			foreach ($ColumnNames as $ColumnName){
 				$Columns .= ($ColumnName. ", ");
 			}
+		$last_char = substr($Columns, -2);
+		if($last_char == ", "){
+				$Columns= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Columns);
+			}
 		}
 		else{
 			$Columns = "*";
 		}
 		
+			//if($last_word == ","){
+			//	$Columns= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Columns);
+			//}
 		$query .=  $Columns. " from ". $TableName;
 		
 		if(count($Wheres))
@@ -30,12 +37,17 @@ class model extends dbcore{
 				}
 				else
 				{
-					$Where_string .= $Where_key. '"'. $Where_Value. '"'. " AND ";
+					$Where_string .= " ". $Where_key. '"'. $Where_Value. '"'. " AND";
 				}
+			}
+			$where_pieces = explode(' ', $Where_string);
+			$last_word = array_pop($where_pieces);
+			if($last_word == "AND"){
+				$Where_string= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Where_string);
 			}
 		$query .= " Where ". $Where_string;
 		}
-		echo $query;
+		//echo $query;
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
 		return $select_query->fetchall();	
