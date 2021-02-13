@@ -23,4 +23,10 @@ class Controller
 		$change_pass = new members();
 		return $change_pass->change_password($email, $new_password, $old_password);
 	}
+	function delete_user(){
+		$email = "info@applyforum.ir";
+		$password = "47047";
+		$delete_user = new members();
+		return $delete_user->delete_user($email, $password);
+	}
 }

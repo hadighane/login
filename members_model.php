@@ -37,5 +37,18 @@ class members extends model{
 			echo "Your old password is wrong";
 		}
 	}
-		
+	function delete_user($email, $password)
+	{
+		if ($this->valid_pass($email, $password))
+		{
+			$TableName = "members";
+			$password = md5($password);
+			$Wheres = ["email" => $email, "password" => $password];
+			$query = $this->delete($TableName, $Wheres);
+			return $query;
+		}
+		else{
+			echo "Username or password is invalid.";
+		}
+	}		
 }

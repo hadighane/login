@@ -110,13 +110,12 @@ class model extends dbcore{
 				}
 			}
 		$where_pieces = explode(' ', $Where_string);
-			$last_word = array_pop($where_pieces);
-			if($last_word == "AND"){
-				$Where_string= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Where_string);
-			}
+		$last_word = array_pop($where_pieces);
+		if($last_word == "AND"){
+			$Where_string= preg_replace('/\W\w+\s*(\W*)$/', '$1', $Where_string);
+		}
 		$query .= $Where_string;
 		}
-		echo $query;
 		$update_query = $this->conn->prepare($query);
 		return $update_query -> execute();
 		
@@ -130,16 +129,18 @@ class model extends dbcore{
 			{
 				if(count($Wheres)==1)
 				{
-					$Where_string = $Where_key. '"'. $Where_Value. '"';
+					$Where_string = $Where_key. ' = "'. $Where_Value. '"';
 				}
 				else
 				{
-					$Where_string .= $Where_key. '"'. $Where_Value. '"'. " AND ";
+					$Where_string .= $Where_key. ' = "'. $Where_Value. '"'. " AND ";
 				}
 			}
-		$query .= $Where_string;
+			$query .= $Where_string. "remove extra AND";
+			$query = str_replace('AND remove extra AND', ' ', $query);
 		}
+		echo $query;
 		$delete_query = $this->conn->prepare($query);
-		$delete_query -> execute();
+		return $delete_query -> execute();
 	}
 }

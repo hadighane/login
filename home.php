@@ -6,4 +6,5 @@ include "Controller.php";
 
 $x = new Controller();
 //echo(  $x -> hello_user());
-var_dump ($x->change_password());
+//$x->change_password();
+$x->delete_user();
