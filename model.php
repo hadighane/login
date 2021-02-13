@@ -62,11 +62,12 @@ class model extends dbcore{
 			}
 		}
 		
-		$query .=  $TableName ." (" .$Columns .") VALUES (";
+		$query .=  $TableName ." (" .$Columns ."Delete extra comma) VALUES (";
+		$query = str_replace(', Delete extra comma', ' ', $query);
 		
 		if(count($Values)>1){
 			foreach ($Values as $Value){
-				$Value_string .= ($Value. ", ");
+				$Value_string .= ("'". $Value. "', ");
 			}
 		}
 		else{
@@ -74,9 +75,10 @@ class model extends dbcore{
 				$Value_string = $Value;
 			}
 		}
-		$query .= $Value_string. ")";
+		$query .= $Value_string. "Delete extra comma)";
+		$query = str_replace(', Delete extra comma', ' ', $query);
 		$insert_query = $this->conn->prepare($query);
-		$insert_query -> execute();
+		return $insert_query -> execute();
 		
 	}
 	function update ($TableName,$ColumnNames=[],$Values=[],$Wheres=[])
@@ -139,7 +141,6 @@ class model extends dbcore{
 			$query .= $Where_string. "remove extra AND";
 			$query = str_replace('AND remove extra AND', ' ', $query);
 		}
-		echo $query;
 		$delete_query = $this->conn->prepare($query);
 		return $delete_query -> execute();
 	}

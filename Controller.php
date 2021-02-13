@@ -1,6 +1,11 @@
 <?php
 class Controller
-{
+{	
+	/*
+	function __construct(){
+		$user = new members();
+	}
+	*/
 	function find_username() 
 	{
 		$user = new members();
@@ -20,13 +25,19 @@ class Controller
 		$email = "ce.negro@yahoo.com";
 		$old_password = "123456";
 		$new_password = "47047";
-		$change_pass = new members();
-		return $change_pass->change_password($email, $new_password, $old_password);
+		$user = new members();
+		return $user->change_password($email, $new_password, $old_password);
 	}
 	function delete_user(){
 		$email = "info@applyforum.ir";
 		$password = "47047";
-		$delete_user = new members();
-		return $delete_user->delete_user($email, $password);
+		$user = new members();
+		return $user->delete_user($email, $password);
+	}
+	function add_user(){
+		$email = "info@applyforum";
+		$password = "47047";
+		$user = new members();
+		return $user->add_user($email, $password);
 	}
 }
