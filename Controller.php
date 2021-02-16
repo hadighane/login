@@ -1,24 +1,25 @@
 <?php
-class Controller
+
+class Controller extends members
 {	
-	/*
-	function __construct(){
-		$user = new members();
-	}
-	*/
-	function find_username() 
+	function find_users($email, $password) 
 	{
-		$user = new members();
-		return $user->find_user("ce.negro@yahoo.com", "47047");
+		//$user = new members();
+		$query = $this->valid_user($email, $password);
+		if ($query){
+			return true;
+		}else{
+			return 0;
+		}
 	}
 	
-	function get_username(){
-		$ret = $this->find_username();
+	function get_username($email, $password){
+		$ret = $this->find_user($email, $password);
 		return $ret[0]['email'];
 	}
 	
-	function hello_user(){
-		return "Hello " . $this->get_username(); 
+	function hello_user($email, $password){
+		return "Hello " . $this->get_username($email, $password); 
 	}
 	
 	function change_password(){

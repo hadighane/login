@@ -13,7 +13,7 @@ class model extends dbcore{
 			foreach ($ColumnNames as $ColumnName){
 				$Columns .= ($ColumnName. ", ");
 			}
-			$Columns .= ", remove extra comma";
+			$Columns .= "remove extra comma";
 		}
 		else{
 			$Columns = "*";
@@ -43,11 +43,14 @@ class model extends dbcore{
 			}
 		$query .= " Where ". $Where_string;
 		}
-		echo $query;
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
-		return $select_query->fetchall();	
-		
+		if(count($select_query->fetchall()))
+		{
+			return true;
+		}else{
+			return false;
+		}
 	}
 	function insert ($TableName, $ColumnNames=[], $Values=[])
 	{

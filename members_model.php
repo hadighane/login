@@ -8,15 +8,19 @@ class members extends model{
 		$password = md5($password);
 		$Wheres = ["email =" => $email, "password =" => $password];
 		$query = $this-> select($TableName,$ColumnNames,$Wheres);
-		return $query;
+		if ($query){
+			return True;
+		}else{
+			return False;
+		}
 	}
-	function valid_pass($email, $password)
+	function valid_user($email, $password)
 	{
 		$TableName = "members";
 		$ColumnNames = ["email", "password"];
 		$Wheres = ["email =" => $email , "password =" => md5($password)];
 		$query = $this->select($TableName, $ColumnNames, $Wheres);
-		if(count($query)){
+		if($query){
 			return TRUE;
 		}else{
 			return FALSE;

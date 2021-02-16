@@ -1,5 +1,4 @@
 <?php
-
 class dbcore{
 function connection(){
 $servername = "localhost";
