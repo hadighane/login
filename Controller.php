@@ -35,10 +35,8 @@ class Controller extends members
 		$user = new members();
 		return $user->delete_user($email, $password);
 	}
-	function add_user(){
-		$email = "info@applyforum";
-		$password = "47047";
+	function add_user($email, $password, $fname, $lname, $phone){
 		$user = new members();
-		return $user->add_user($email, $password);
+		return $user->add_user($email, $password, $fname, $lname, $phone);
 	}
 }

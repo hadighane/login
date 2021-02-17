@@ -53,9 +53,9 @@ else
   <br>
   <input type="submit" value="Login">
   <br>
-  <a href="signup.php">For sign up, click here</a>
+  <a href="http://localhost/test/login/login/signup.php/">For sign up, click here</a>
   <br>
-  <a href="forgetpass.php"> Forget Password </a>
+  <a href="http://localhost/test/login/login/forgetpass.php/"> Forget Password </a>
   </DIV>
 </form>'
 );

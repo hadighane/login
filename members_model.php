@@ -56,14 +56,13 @@ class members extends model{
 			echo "Username or password is invalid.";
 		}
 	}
-	function add_user($email, $password)
+	function add_user($email, $password, $fname, $lname, $phone)
 	{
 		$TableName = "members";
-		$password = md5($password);
 		$lastlogin = time();
 		$lastip = $_SERVER["REMOTE_ADDR"];
-		$ColumnNames = ["email", "password"];
-		$Values = [$email, $password];
+		$ColumnNames = ["email", "password", "fname", "lname", "phone"];
+		$Values = [$email, $password, $fname, $lname, $phone];
 		$query = $this->insert($TableName, $ColumnNames, $Values);
 		return $query;
 	}		

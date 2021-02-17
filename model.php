@@ -84,7 +84,6 @@ class model extends dbcore{
 		$query = str_replace(', Delete extra comma', ' ', $query);
 		$insert_query = $this->conn->prepare($query);
 		return $insert_query -> execute();
-		
 	}
 	function update ($TableName,$ColumnNames=[],$Values=[],$Wheres=[])
 	{
