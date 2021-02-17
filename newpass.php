@@ -30,7 +30,7 @@ if ($_POST){
 	  <label for="new_password">New Password:</label>
 	  <input type="password" id="new_password" name="new_password" placeholder="new password"><br>	  
 	  <br>
-	  <input type="submit" value="Change Password">
+	  <input type="submit" value="Change Password">QWSDXC 5TYGHB
 	  <br>
 	  </DIV>
 	</form>'
