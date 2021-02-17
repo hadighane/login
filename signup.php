@@ -4,11 +4,11 @@ include ("model.php");
 include ("members_model.php");
 include "Controller.php";
 if ($_POST){
-	$email = $_POST[get_username];
-	$password = md5( $_POST[get_password]);
-	$fname =  $_POST[get_fname];
-	$lname =  $_POST[get_lname];
-	$phone =  $_POST[phone_number];
+	$email = $_POST["get_username"];
+	$password = md5( $_POST["get_password"]);
+	$fname =  $_POST["get_fname"];
+	$lname =  $_POST["get_lname"];
+	$phone =  $_POST["phone_number"];
 	$new_user = new Controller();
 	$added = $new_user -> add_user ($email, $password, $fname, $lname, $phone);
 	if($added){

@@ -1,12 +1,11 @@
 <?php
 class members extends model{
 	
-	function find_user($email, $password)
+	function find_user($email, $phone)
 	{
 		$TableName = "members";
 		$ColumnNames = [];
-		$password = md5($password);
-		$Wheres = ["email =" => $email, "password =" => $password];
+		$Wheres = ["email =" => $email, "phone =" => $phone];
 		$query = $this-> select($TableName,$ColumnNames,$Wheres);
 		if ($query){
 			return True;
@@ -41,6 +40,16 @@ class members extends model{
 		else{
 			echo "Your old password is wrong";
 		}
+	}
+	function forget_password($email, $new_password)
+	{
+		$TableName = "members";
+		$ColumnNames = ["password"];
+		$password = md5($new_password);
+		$Values = [$password];
+		$Wheres = ["email" => $email];
+		$query = $this->update($TableName,$ColumnNames,$Values,$Wheres);
+		return $query;
 	}
 	function delete_user($email, $password)
 	{

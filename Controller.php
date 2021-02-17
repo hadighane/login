@@ -22,6 +22,17 @@ class Controller extends members
 		return "Hello " . $this->get_username($email, $password); 
 	}
 	
+	function get_user($email, $phone){
+		$ret = $this->find_user($email, $phone);
+		//return $ret[0]['email'];
+		if ($ret){
+			return true;
+		}
+	}
+	function forget_password($email, $new_password){
+		$user = new members();
+		return $user->forget_password($email, $new_password);
+	}
 	function change_password(){
 		$email = "ce.negro@yahoo.com";
 		$old_password = "123456";
