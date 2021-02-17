@@ -45,12 +45,16 @@ class model extends dbcore{
 		}
 		$select_query = $this->conn->prepare($query);
 		$select_query -> execute();
+		$query = $select_query->fetchall();
+		return $query;
+		/*
 		if(count($select_query->fetchall()))
 		{
 			return true;
 		}else{
 			return false;
 		}
+		*/
 	}
 	function insert ($TableName, $ColumnNames=[], $Values=[])
 	{

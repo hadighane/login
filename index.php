@@ -78,5 +78,18 @@ if ($_POST['submit'] or $_COOKIE){
 		}
 	}
 echo "<hr>";
-
+if ($_POST['submit']){
+	$email = $_POST['get_username'];
+}elseif ($_COOKIE){
+	$email = $_COOKIE['username'];
+}
+$x = new note();
+$member_id = $x -> get_id ($email);
+$notes = $x -> get_note ($member_id);
+foreach ($notes as $key => $value){
+	if ($key = "note")
+	{
+		echo $value["$key"]. "<br><br>";
+	}
+}
 }

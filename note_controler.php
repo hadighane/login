@@ -18,8 +18,16 @@ class note extends model{
 		$TableName = "members";
 		$ColumnNames = ["id"];
 		$Wheres = ["email =" => $email];
-		$members = $this-> select($TableName,$ColumnNames,$Wheres);
-		$members_id = $members["id"];
-		return $members_id;
+		$member = $this-> select($TableName,$ColumnNames,$Wheres);
+		$member_id = $member[0]["id"];
+		return $member_id;
+	}
+	function get_note ($members_id)
+	{
+		$TableName = "notebook";
+		$ColumnNames = ["title", "note"];
+		$Wheres = ['members_id =' => $members_id];
+		$note = $this->select($TableName,$ColumnNames,$Wheres);
+		return $note;
 	}
 }

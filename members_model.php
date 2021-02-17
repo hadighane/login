@@ -7,7 +7,7 @@ class members extends model{
 		$ColumnNames = [];
 		$Wheres = ["email =" => $email, "phone =" => $phone];
 		$query = $this-> select($TableName,$ColumnNames,$Wheres);
-		if ($query){
+		if (count($query)){
 			return True;
 		}else{
 			return False;
@@ -19,7 +19,7 @@ class members extends model{
 		$ColumnNames = ["email", "password"];
 		$Wheres = ["email =" => $email , "password =" => md5($password)];
 		$query = $this->select($TableName, $ColumnNames, $Wheres);
-		if($query){
+		if(count($query)){
 			return TRUE;
 		}else{
 			return FALSE;
