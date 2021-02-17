@@ -77,4 +77,6 @@ if ($_POST['submit'] or $_COOKIE){
 			echo "Your note save succefully";
 		}
 	}
+echo "<hr>";
+
 }

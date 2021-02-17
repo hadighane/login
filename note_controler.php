@@ -2,13 +2,8 @@
 class note extends model{
 	function add_note($email, $title, $note)
 	{
-		$TableName = "members";
-		$ColumnNames = ["id"];
-		$Wheres = ["email =" => $email];
-		$members = $this-> select($TableName,$ColumnNames,$Wheres);
-		$members_id = $members["id"];
-	
 		$TableName = "notebook";
+		$members_id = $this->get_id($email);
 		$ColumnNames = ["members_id", "email", "title", "note"];
 		$Values = [$members_id, $email, $title, $note];
 		$query = $this->insert($TableName, $ColumnNames, $Values);
@@ -17,5 +12,14 @@ class note extends model{
 		}else{
 			return false;
 		}
+	}
+	function get_id ($email)
+	{
+		$TableName = "members";
+		$ColumnNames = ["id"];
+		$Wheres = ["email =" => $email];
+		$members = $this-> select($TableName,$ColumnNames,$Wheres);
+		$members_id = $members["id"];
+		return $members_id;
 	}
 }
