@@ -2,6 +2,7 @@
 
 class Controller extends members
 {	
+
 	function find_users($email, $password) 
 	{
 		//$user = new members();
@@ -33,19 +34,19 @@ class Controller extends members
 		$user = new members();
 		return $user->forget_password($email, $new_password);
 	}
-	function change_password(){
+	/*function change_password(){
 		$email = "ce.negro@yahoo.com";
 		$old_password = "123456";
 		$new_password = "47047";
 		$user = new members();
 		return $user->change_password($email, $new_password, $old_password);
-	}
+	} 
 	function delete_user(){
 		$email = "info@applyforum.ir";
 		$password = "47047";
 		$user = new members();
 		return $user->delete_user($email, $password);
-	}
+	} */
 	function add_user($email, $password, $fname, $lname, $phone){
 		$user = new members();
 		return $user->add_user($email, $password, $fname, $lname, $phone);

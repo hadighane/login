@@ -126,6 +126,7 @@ class model extends dbcore{
 		}
 		$query .= $Where_string;
 		}
+
 		$update_query = $this->conn->prepare($query);
 		return $update_query -> execute();
 		

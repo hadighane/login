@@ -13,6 +13,8 @@ if ($_POST['submit']){
 	if ($user){
 		echo ("<p style='color:Blue'>  Dear $email , Wellcome to our website! </title><br><hr>");
 		setcookie("username",$email, time()+600);
+		@session_start();
+		$_SESSION["email"] = $email;
 		setcookie("password",$password, time()+600);
 	}else{
 		echo ("Your username or password is invalid!");
@@ -70,11 +72,11 @@ if ($_POST['submit'] or $_COOKIE){
 	<textarea name='paragraph_text' cols='50' rows='10'></textarea><br>
 	<br>
 	<input type='submit' value='Save' form='form2' name='save'>");
-	if($_POST['save']){
+	if(@$_POST['save']){
 		$x = new note();
 		$new_note = $x -> add_note($email, $_POST["get_title"], $_POST["paragraph_text"]);
 		if($new_note){
-			echo "Your note save succefully";
+			echo "<p style='color:red'> Your note saved succefully </p>";
 		}
 	}
 echo "<hr>";
@@ -86,10 +88,11 @@ if ($_POST['submit']){
 $x = new note();
 $member_id = $x -> get_id ($email);
 $notes = $x -> get_note ($member_id);
-foreach ($notes as $key => $value){
-	if ($key = "note")
-	{
-		echo $value["$key"]. "<br><br>";
-	}
+$s = 1;
+foreach ($notes as $value){
+
+		echo "<p style='color:Blue'> <br><a href='edit.php?id=". $value["id"] . "'>Note number $s: ". $value["note"]. "</a><br></p>";
+		$s = $s + 1;
+	
 }
 }

@@ -15,6 +15,7 @@ if ($_POST){
 		setcookie("username",$email, time()+600);
 		setcookie("password",$password, time()+600);
 		echo "Thanks for your signup, if you want to continue, <a href='http://localhost/test/login/login/index.php/'> Click here! </a>";
+		header('Location: http://localhost/test/login/login/index.php');
 	}
 }else{
 	echo (
@@ -28,7 +29,7 @@ if ($_POST){
 	  background-color: white;
 	  }
 	  </style>
-	  <form action="signup.php" method="POST">
+	  <form action="#" method="POST">
 	  <body style="background-color:black;">
 	  <br>
 	  <DIV>

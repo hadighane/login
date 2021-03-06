@@ -25,6 +25,9 @@ class members extends model{
 			return FALSE;
 		}
 	}
+	
+
+	
 	function change_password($email, $new_password, $old_password)
 	{
 		if($this->valid_pass($email, $old_password))
